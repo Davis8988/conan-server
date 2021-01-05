@@ -6,8 +6,9 @@ import os
 import sys
 import configparser
 
-conan_server_config_file_default = '/root/.conan_server/server.conf'
-conan_server_config_file = os.environ.get("CONAN_SERVER_CONFIG_FILE", conan_server_config_file_default)
+conan_server_config_file = os.environ.get("CONAN_SERVER_CONFIG_FILE")
+conan_server_user_name = os.environ.get("CONAN_SERVER_USER_NAME")
+conan_server_user_pass = os.environ.get("CONAN_SERVER_USER_PASS")
 
 print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 if not os.path.exists(conan_server_config_file):
