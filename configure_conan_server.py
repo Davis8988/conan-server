@@ -13,6 +13,26 @@ conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS", 
 conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS", None)
 
 
+def get_default_server_settings():
+	default_server_section_data = {
+		'jwt_secret' : "sJTkzgNOewoPlGMpQYOKWnCd",
+		'jwt_expire_minutes' : "120",
+		'ssl_enabled' : False,
+		'port' : 9300,
+		'public_port' : None,
+		'host_name' : "localhost",
+		'authorize_timeout' : "1800",
+		'disk_storage_path' : "./data",
+		'disk_authorize_timeout' : "1800",
+		'updown_secret' : "ZlKsEGVuWWlmqWoOIGkVnSRQ"
+	}
+	default_server_settings_config = configparser.ConfigParser()
+	default_server_settings_config.add_section("server")
+	for k,v in default_server_section_data.items():
+		default_server_settings_config["server"][k] = v
+	return default_server_settings_config
+
+
 def check_params():
 	global conan_server_creds_list
 	# Check conan-server config file var not null
@@ -56,6 +76,7 @@ def validate_config(config):
 def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 	check_params()
+	default_server_settings = get_default_server_settings()
 	config = read_conf_file()
 	validate_config(config)
 	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
