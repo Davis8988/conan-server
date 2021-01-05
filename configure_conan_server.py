@@ -199,7 +199,7 @@ def configure_conan_server_conf_file(config):
 
 def write_conan_server_conf_file(config):
 	try:
-		with open('example.ini', 'w') as configfile:
+		with open(conan_server_config_file, 'w') as configfile:
 			config.write(configfile)
 	except BaseException as error_msg:
 		print(f"Error - Failed to write conan-server config ini file: '{conan_server_config_file}'\n{error_msg}")
