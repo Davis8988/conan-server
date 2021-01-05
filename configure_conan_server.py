@@ -95,10 +95,10 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
 			config.add_section(section)
 			continue
 		for k,v in section.items():
+			k = k.strip()
+			v = v.strip()
 			if not config.has_option(sec_name, k):
 				print(f"Adding default missing configuration: {sec_name}.{k}={v}")
-				k = k.strip()
-				v = v.strip()
 				config[sec_name][k] = v
 
 	return config
@@ -179,9 +179,9 @@ def configure_conan_server_conf_file(config):
 			if not validate_creds(creds):
 				continue
 			username, password = creds.split(":")
+			username = username.strip()
+			password = password.strip()
 			if not config.has_option("users", username):
-				username = username.strip()
-				password = password.strip()
 				print(f"Adding username: '{username}'")
 				config["users"][username] = password
 
@@ -191,10 +191,10 @@ def configure_conan_server_conf_file(config):
 			if not validate_permissions(creds):
 				continue
 			prefix_scope, postfix_scope = permissions.split(":")
+			prefix_scope = prefix_scope.strip()
+			postfix_scope = postfix_scope.strip()
 			if not config.has_option("read_permissions", prefix_scope):
 				print(f"Adding read permissions: '{permissions}'")
-				prefix_scope = prefix_scope.strip()
-				postfix_scope = postfix_scope.strip()
 				config["read_permissions"][prefix_scope] = postfix_scope
 
 	if conan_server_write_permissions:
@@ -203,10 +203,10 @@ def configure_conan_server_conf_file(config):
 			if not validate_permissions(creds):
 				continue
 			prefix_scope, postfix_scope = permissions.split(":")
+			prefix_scope = prefix_scope.strip()
+			postfix_scope = postfix_scope.strip()
 			if not config.has_option("write_permissions", prefix_scope):
 				print(f"Adding write permissions: '{permissions}'")
-				prefix_scope = prefix_scope.strip()
-				postfix_scope = postfix_scope.strip()
 				config["write_permissions"][prefix_scope] = postfix_scope
 
 	return config
