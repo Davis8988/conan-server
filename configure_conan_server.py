@@ -160,7 +160,7 @@ def configure_conan_server_conf_file(config):
 				print(f"Adding read permissions: '{permissions}'")
 				config["read_permissions"][prefix_scope] = postfix_scope
 
-	if conan_server_read_permissions:
+	if conan_server_write_permissions:
 		print("Configuring Write Permissions")
 		for permissions in conan_server_write_permissions:
 			if not validate_permissions(creds):
