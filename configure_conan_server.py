@@ -127,8 +127,8 @@ def validate_permissions(permissions):
 		return False
 	for ps in [prefix_scope, postfix_scope]:
 		a,b = ps.split("/")
-		if len(a) == 0:
-			print(f"Warning - Skipping configure permissions of: '{permissions}'  - One of the scopes betwee '/' sign is of length = 0 (empty)\n{error_msg}")
+		if len(a) == 0 or len(b) == 0:
+			print(f"Warning - Skipping configure permissions of: '{permissions}'  - One of the scopes between '/' sign of: '{ps}' is of length = 0 (empty)\n{error_msg}")
 			return False
 	return True
 
