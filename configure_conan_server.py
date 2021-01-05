@@ -100,6 +100,7 @@ def validate_creds(creds):
 
 def configure_conan_server_conf_file(config):
 	if type(conan_server_creds_list) == list and len(conan_server_creds_list) > 0:
+		print("Configuring Creds")
 		for creds in conan_server_creds_list:
 			if not validate_creds(creds):
 				continue
