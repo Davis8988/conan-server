@@ -81,6 +81,7 @@ def validate_config(config, default_server_settings):
 	print("Finished validating config file")
 	return config
 
+
 def validate_creds(creds):
 	if not creds:
 		return False
@@ -94,6 +95,7 @@ def validate_creds(creds):
 	if len(password) == 0:
 		print(f"Warning - Skipping configure creds of: {creds} becuase their are not in the right format\npassword is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
 		return False
+
 
 def configure_conan_server_conf_file(config):
 	if type(conan_server_creds_list) == list and len(conan_server_creds_list) > 0:
