@@ -82,6 +82,10 @@ def read_conf_file():
 		sys.exit(1)
 
 
+def fix_missing_settings_with_defaults(config, default_server_settings):
+
+
+
 def validate_config(config, default_server_settings):
 	print("Validating config file")
 	for sec_name in required_sections:
@@ -183,13 +187,24 @@ def configure_conan_server_conf_file(config):
 	return config
 
 
+def write_conan_server_conf_file(config):
+	try:
+		with open('example.ini', 'w') as configfile:
+			config.write(configfile)
+	except BaseException as error_msg:
+		print(f"Error - Failed to write conan-server config ini file: '{conan_server_config_file}'\n{error_msg}")
+		sys.exit(1)
+
+
 def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 	check_params()
-	default_server_settings = get_default_server_settings()
 	config = read_conf_file()
+	default_server_settings = get_default_server_settings()
+	config = fix_missing_settings_with_defaults(config, default_server_settings)
 	config = validate_config(config, default_server_settings)
 	config = configure_conan_server_conf_file(config)
+	write_conan_server_conf_file(config)
 	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
 
