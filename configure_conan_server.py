@@ -34,6 +34,18 @@ def get_default_server_settings():
 	return default_server_settings_config
 
 
+def convert_to_list(string_var, delimiter):
+	if not string_var:
+		return None
+	converted_list = string_var.split(";")
+	if type(converted_list) != list:
+		print(f"Error - Failed to convert var 'string_var={string_var}' to type 'list' using split(';')")
+		return None
+	if len(converted_list) == 0:
+		return None
+	return converted_list
+
+
 def check_params():
 	global conan_server_creds_list
 	# Check conan-server config file var not null
@@ -46,14 +58,6 @@ def check_params():
 	if not os.path.exists(conan_server_config_file):
 		print(f"Error - Missing conan-server config ini file: '{conan_server_config_file}' \n cannot configure conan-server")
 		sys.exit(1)
-
-	# Convert conan_server_creds_list to a list using split(";")
-	if conan_server_creds_list:
-		print("Preparing creds list to configure")
-		conan_server_creds_list = conan_server_creds_list.split(";")
-		if type(conan_server_creds_list) != list:
-			print(f"Error - Failed to convert var 'conan_server_creds_list={conan_server_creds_list}' to type 'list' using split:  conan_server_creds_list=conan_server_creds_list.split(';')\ntype(conan_server_creds_list)=={type(conan_server_creds_list)}")
-			sys.exit(1)
 
 
 # Read conan-server config file
