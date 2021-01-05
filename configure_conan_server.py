@@ -92,7 +92,7 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
             k = k.strip()
             v = v.strip()
             if not config.has_option(sec_name, k):
-                print(f"Adding default missing configuration: {sec_name}.{k} = '{v}' ")
+                print(f" - Adding default missing configuration: {sec_name}.{k} = '{v}' ")
                 config[sec_name][k] = v
     return config
 
@@ -101,7 +101,7 @@ def validate_config(config):
     print("Validating config file")
     for sec_name in required_sections:
         if not config.has_section(sec_name):
-            print(f"Adding is missing section: '{sec_name}'")
+            print(f" - Adding missing section: '{sec_name}'")
             config.add_section(sec_name)
     return config
 
@@ -188,7 +188,7 @@ def configure_conan_server_conf_file(config):
             username = username.strip()
             password = password.strip()
             if not config.has_option("users", username):
-                print(f"Adding username: '{username}'")
+                print(f" - Adding username: '{username}'")
                 config["users"][username] = password
 
     if conan_server_read_permissions:
@@ -200,7 +200,7 @@ def configure_conan_server_conf_file(config):
             prefix_scope = prefix_scope.strip()
             postfix_scope = postfix_scope.strip()
             if not config.has_option("read_permissions", prefix_scope):
-                print(f"Adding read permissions: '{permissions}'")
+                print(f" - Adding read permissions: '{permissions}'")
                 config["read_permissions"][prefix_scope] = postfix_scope
 
     if conan_server_write_permissions:
@@ -212,7 +212,7 @@ def configure_conan_server_conf_file(config):
             prefix_scope = prefix_scope.strip()
             postfix_scope = postfix_scope.strip()
             if not config.has_option("write_permissions", prefix_scope):
-                print(f"Adding write permissions: '{permissions}'")
+                print(f" - Adding write permissions: '{permissions}'")
                 config["write_permissions"][prefix_scope] = postfix_scope
 
     return config
