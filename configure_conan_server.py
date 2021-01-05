@@ -180,6 +180,8 @@ def configure_conan_server_conf_file(config):
 				print(f"Adding write permissions: '{permissions}'")
 				config["write_permissions"][prefix_scope] = postfix_scope
 
+	return config
+
 
 def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
