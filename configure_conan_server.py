@@ -90,14 +90,29 @@ def validate_creds(creds):
 	if not creds:
 		return False
 	if ':' not in creds:
-		print(f"Warning - Skipping configure creds of: {creds} becuase their are not in the right format\n Should be: 'username: pass'. Example: 'david: 123' ")
+		print(f"Warning - Skipping configure creds of: '{creds}' becuase they are not in the right format\n Should be: 'username: pass'. Example: 'david: 123' ")
 		return False
 	username, password = creds.split(":")
 	if len(username) == 0:
-		print(f"Warning - Skipping configure creds of: {creds} becuase their are not in the right format\nusername is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
+		print(f"Warning - Skipping configure creds of: '{creds}' becuase they are not in the right format\nusername is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
 		return False
 	if len(password) == 0:
-		print(f"Warning - Skipping configure creds of: {creds} becuase their are not in the right format\npassword is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
+		print(f"Warning - Skipping configure creds of: '{creds}' becuase they are not in the right format\npassword is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
+		return False
+	return True
+
+def validate_permissions(permissions):
+	if not permissions:
+		return False
+	if ':' not in permissions:
+		print(f"Warning - Skipping configure permissions of: '{permissions}' becuase they are not in the right format\n Should be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo' ")
+		return False
+	username, password = permissions.split(":")
+	if len(username) == 0:
+		print(f"Warning - Skipping configure permissions of: '{permissions}' becuase they are not in the right format\nusername is of length 0\nShould be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo'")
+		return False
+	if len(password) == 0:
+		print(f"Warning - Skipping configure permissions of: '{permissions}' becuase they are not in the right format\npassword is of length 0\nShould be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo'")
 		return False
 	return True
 
@@ -119,6 +134,15 @@ def configure_conan_server_conf_file(config):
 				print(f"Adding username: '{username}'")
 				config["users"][username] = password
 
+	if conan_server_read_permissions:
+		print("Configuring Permissions")
+		for creds in conan_server_creds_list:
+			if not validate_creds(creds):
+				continue
+			username, password = creds.split(":")
+			if not config.has_option("users", username):
+				print(f"Adding username: '{username}'")
+				config["users"][username] = password
 
 
 def main():
