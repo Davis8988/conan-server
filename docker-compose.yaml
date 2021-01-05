@@ -3,34 +3,13 @@ version: "3"
 # Restarting nexus will add configurations to conan-server config file incase they don't exist
 
 
-# Cron:
-#  use 'H' for '*'
-# - Example:
-# -   NEXUS_PACKAGES_ROTATION_RETAIN_COUNT=10
-# -   NEXUS_PACKAGES_ROTATION_CRON_EXPRESSION="1 1 1 ? 2 3"  use 'H' for '*'
-# -   NEXUS_PACKAGES_ROTATION_REPOS_TO_CLEAN=nuget-hosted,docker-hosted
-# -   NEXUS_PACKAGES_ROTATION_COMPONENTS_NAMES_WHITE_LIST=david,bob
+# Available Confs:
+# - CONAN_SERVER_LISTEN_IP=127.0.0.1    (Listen IP for conan-server to accept requests from. Default: '0.0.0.0' means every ip)
+# - CONAN_SERVER_LISTEN_PORT=4544       (Listen Port for conan-server to accept requests from. Default: '9300')
+# - CONAN_SERVER_WORKERS_COUNT=7        (gunicorn workers count. Default: 4)
+# - CONAN_SERVER_TIMEOUT_SECONDS=120    (conan-server timeout in seconds. Default: '300')
 
-# Ports:
-# - CREATE_DOCKER_INTERNAL_REPOSITORY_HTTPS_PORT=8082           # Must have port forwarding: "8082:8082"
-# - CREATE_DOCKER_PROXY_REPOSITORY_HTTPS_PORT=8084              # Must have port forwarding: "8084:8084"
-# - CREATE_DOCKER_GROUP_REPOSITORY_HTTPS_PORT=8086               # Must have port forwarding: "8086:8086"
-
-# 
-# - NEXUS_BASE_URL=http://192.168.59.103:8081
-# - KEEP_DEFAULT_REPOSITORIES=1
-
-# Proxy
-# - CREATE_DOCKER_PROXY_REPOSITORY=docker-proxy
-# - CREATE_DOCKER_PROXY_REPOSITORY_HTTP_PORT=5002               
-# - CREATE_DOCKER_PROXY_REPOSITORY_URL=https://chocolatey.org/api/v2/
-# - CREATE_NUGET_PROXY_REPOSITORY=nuget-proxy
-# - CREATE_NUGET_PROXY_REPOSITORY_URL=https://chocolatey.org/api/v2/
-
-# ApiKeys
-# - NEXUS_NUGET_API_TOKENS_RESET_ALL=true
-# - NEXUS_NORMAL_USER_NUGET_API_TOKEN_RESET=true
-# - NEXUS_ADMIN_USER_NUGET_API_TOKEN_RESET=true
+# - CONAN_SERVER_CREDS_LIST=david:qawsED ; ben:zxcASD ; guy:ppp112     (Semicolon separated list of "user: pass"  pairs to configure conan-server to work with. Default: 'demo: demo')
 
 services:
   conan-server:
@@ -44,4 +23,5 @@ services:
     ports:
       - "9300:9300"
     environment:
+      - CONAN_SERVER_USER_NAME=0.0.0.0
       - 
