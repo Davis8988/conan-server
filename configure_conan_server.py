@@ -17,9 +17,9 @@ def get_default_server_settings():
 	default_server_section_data = {
 		'jwt_secret' : "sJTkzgNOewoPlGMpQYOKWnCd",
 		'jwt_expire_minutes' : "120",
-		'ssl_enabled' : False,
-		'port' : 9300,
-		'public_port' : None,
+		'ssl_enabled' : "False",
+		'port' : "9300",
+		'public_port' : "",
 		'host_name' : "localhost",
 		'authorize_timeout' : "1800",
 		'disk_storage_path' : "./data",
@@ -69,6 +69,11 @@ def read_conf_file():
 
 def validate_config(config, default_server_settings):
 	print("Validating config file")
+	for k,v in default_server_settings.items():
+		if not config.has_option("server", k):
+			print(f"Adding missing entry to config file: server.{k} = {v}")
+			config["server"][k] = v
+
 
 
 
