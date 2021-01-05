@@ -33,10 +33,10 @@ echo "  Read Permissions: '$CONAN_SERVER_READ_PERMISSIONS_LIST'"
 echo ""
 
 # Start conan-server
-echo Starting conan-server:
-echo Executing: gunicorn -b ${CONAN_SERVER_LISTEN_IP}:${CONAN_SERVER_LISTEN_PORT} -w ${CONAN_SERVER_WORKERS_COUNT} -t ${CONAN_SERVER_TIMEOUT_SECONDS} conans.server.server_launcher:app
+echo "Starting conan-server:"
+echo "Executing: gunicorn -b ${CONAN_SERVER_LISTEN_IP}:${CONAN_SERVER_LISTEN_PORT} -w ${CONAN_SERVER_WORKERS_COUNT} -t ${CONAN_SERVER_TIMEOUT_SECONDS} conans.server.server_launcher:app"
 # Run server on port ${CONAN_SERVER_LISTEN_PORT} with ${CONAN_SERVER_WORKERS_COUNT} workers and a timeout of ${CONAN_SERVER_TIMEOUT_SECONDS} seconds
 gunicorn -b ${CONAN_SERVER_LISTEN_IP}:${CONAN_SERVER_LISTEN_PORT} -w ${CONAN_SERVER_WORKERS_COUNT} -t ${CONAN_SERVER_TIMEOUT_SECONDS} conans.server.server_launcher:app
 
-echo Finished executing conan-server
+echo "Finished executing conan-server"
 
