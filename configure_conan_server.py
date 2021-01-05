@@ -95,7 +95,6 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
 			if not config.has_option(sec_name, k):
 				print(f"Adding default missing configuration: {sec_name}.{k} = '{v}' ")
 				config[sec_name][k] = v
-
 	return config
 
 
