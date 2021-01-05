@@ -12,7 +12,7 @@ conan_server_creds_list = os.environ.get("CONAN_SERVER_CREDS_LIST", None)
 conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS", None)
 conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS", None)
 
-
+# Check conan-server config file var not null
 if not conan_server_config_file:
 	print(f"Error - Path to conan-server config ini file is null: '{conan_server_config_file}'\nDid you set env var: 'CONAN_SERVER_CONFIG_FILE' to it?\n cannot configure conan-server")
 	sys.exit(1)
