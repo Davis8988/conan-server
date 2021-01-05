@@ -67,7 +67,7 @@ def read_conf_file():
 		sys.exit(1)
 
 
-def validate_config(config):
+def validate_config(config, default_server_settings):
 	print("Validating config file")
 
 
@@ -78,7 +78,7 @@ def main():
 	check_params()
 	default_server_settings = get_default_server_settings()
 	config = read_conf_file()
-	validate_config(config)
+	validate_config(config, default_server_settings)
 	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
 
