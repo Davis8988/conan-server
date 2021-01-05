@@ -237,6 +237,7 @@ def main():
     config = fix_missing_settings_with_defaults(config, default_server_settings)
     write_conan_server_conf_file(config)
     print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
+    sys.exit(0)
 
 
 # Start
