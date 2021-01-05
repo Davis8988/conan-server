@@ -11,6 +11,7 @@ conan_server_config_file = os.environ.get("CONAN_SERVER_CONFIG_FILE", None)
 conan_server_user_name = os.environ.get("CONAN_SERVER_USER_NAME", None)
 conan_server_user_pass = os.environ.get("CONAN_SERVER_USER_PASS", None)
 conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS", None)
+conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS", None)
 
 
 # Check conan-server config file exists
