@@ -7,8 +7,8 @@ import configparser
 
 conan_server_config_file = os.environ.get("CONAN_SERVER_CONFIG_FILE", None)
 conan_server_creds_list = os.environ.get("CONAN_SERVER_CREDS_LIST", None)
-conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS", None)
-conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS", None)
+conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS_LIST", None)
+conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS_LIST", None)
 
 required_sections = ["server", "write_permissions", "read_permissions", "users"]
 
