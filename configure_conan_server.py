@@ -21,7 +21,7 @@ def check_params():
 		sys.exit(1)
 
 	# Check conan-server config file exists
-	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
+	print(f"Checking config file exists")
 	if not os.path.exists(conan_server_config_file):
 		print(f"Error - Missing conan-server config ini file: '{conan_server_config_file}' \n cannot configure conan-server")
 		sys.exit(1)
@@ -46,12 +46,12 @@ def read_conf_file():
 		print(f"Error - Failed reading conan-server config ini file: '{conan_server_config_file}'\n{error_msg}")
 		sys.exit(1)
 
-print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
-
 
 def main():
+	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 	check_params()
 	read_conf_file()
+	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
 # Start
 if __name__ == "__main__":
