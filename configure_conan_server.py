@@ -95,10 +95,10 @@ def validate_creds(creds):
 		return False
 	username, password = creds.split(":")
 	if len(username) == 0:
-		print(f"Warning - Skipping configure creds of: '{creds}' - username is of length = 0\n{error_msg}")
+		print(f"Warning - Skipping configure creds of: '{creds}' - username is of length = 0 (empty)\n{error_msg}")
 		return False
 	if len(password) == 0:
-		print(f"Warning - Skipping configure creds of: '{creds}' - password is of length = 0\n{error_msg}")
+		print(f"Warning - Skipping configure creds of: '{creds}' - password is of length = 0 (empty)\n{error_msg}")
 		return False
 	return True
 
@@ -112,13 +112,24 @@ def validate_permissions(permissions):
 	if '@' not in permissions:
 		print(f"Warning - Skipping configure permissions of: '{permissions}' - Missing '@'\n{error_msg}")
 		return False
-	username, password = permissions.split(":")
-	if len(username) == 0:
-		print(f"Warning - Skipping configure permissions of: '{permissions}' {error_msg}")
+	prefix_scope, postfix_scope = permissions.split(":")
+	if len(prefix_scope) == 0:
+		print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@': '{prefix_scope}' is of length = 0 (empty)\n{error_msg}")
 		return False
-	if len(password) == 0:
-		print(f"Warning - Skipping configure permissions of: '{permissions}' {error_msg}")
+	if '/' not in prefix_scope:
+		print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@': '{prefix_scope}' is missing '/' sign\n{error_msg}")
 		return False
+	if len(postfix_scope) == 0:
+		print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@': '{postfix_scope}' is of length = 0 (empty)\n{error_msg}")
+		return False
+	if '/' not in postfix_scope:
+		print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@': '{postfix_scope}' is missing '/' sign\n{error_msg}")
+		return False
+	for ps in [prefix_scope, postfix_scope]:
+		a,b = ps.split("/")
+		if len(a) == 0:
+			print(f"Warning - Skipping configure permissions of: '{permissions}'  - One of the scopes betwee '/' sign is of length = 0 (empty)\n{error_msg}")
+			return False
 	return True
 
 
