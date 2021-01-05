@@ -26,7 +26,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nteptartifact:5014/conan-server/conan-server:3.17.0-conanio
+    image: nteptartifact:5014/conan-server/conan-server:1.32.1-conanio
     container_name: conan-server
     networks:
       - conan-net
