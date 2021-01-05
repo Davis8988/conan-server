@@ -6,6 +6,7 @@ import sys
 import configparser
 
 conan_server_config_file = os.environ.get("CONAN_SERVER_CONFIG_FILE", None)
+conan_server_host_name = os.environ.get("CONAN_SERVER_HOST_NAME", None)
 conan_server_creds_list = os.environ.get("CONAN_SERVER_CREDS_LIST", None)
 conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS_LIST", None)
 conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS_LIST", None)
@@ -176,6 +177,7 @@ def configure_conan_server_conf_file(config):
     global conan_server_creds_list
     global conan_server_read_permissions
     global conan_server_write_permissions
+    global conan_server_host_name
     conan_server_creds_list = convert_to_list(conan_server_creds_list, ";")
     conan_server_read_permissions = convert_to_list(conan_server_read_permissions, ";")
     conan_server_write_permissions = convert_to_list(conan_server_write_permissions, ";")
@@ -214,6 +216,10 @@ def configure_conan_server_conf_file(config):
             if not config.has_option("write_permissions", prefix_scope):
                 print(f" - Adding write permissions: '{permissions}'")
                 config["write_permissions"][prefix_scope] = postfix_scope
+
+    if conan_server_host_name:
+        print(f"Configuring Hostname to: {conan_server_host_name}")
+        config["server"]["host_name"] = conan_server_host_name
 
     return config
 
