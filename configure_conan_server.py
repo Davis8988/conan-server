@@ -139,18 +139,31 @@ def validate_permissions(permissions):
     prefix_scope = prefix_scope.strip()
     postfix_scope = postfix_scope.strip()
     if len(prefix_scope) == 0:
-        print(
-            f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@' - '{prefix_scope}' is of length = 0 (empty)\n{error_msg}")
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@' - '{prefix_scope}' is of length = 0 (empty)\n{error_msg}")
+        return False
+    if len(postfix_scope) == 0:
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The users definition after ':' - '{postfix_scope}' is of length = 0 (empty)\n{error_msg}")
         return False
     if '/' not in prefix_scope:
         print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@' - '{prefix_scope}' is missing '/' sign\n{error_msg}")
         return False
-    if len(postfix_scope) == 0:
-        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@' - '{postfix_scope}' is of length = 0 (empty)\n{error_msg}")
+    prefix_scope_part_1, prefix_scope_part_2 = prefix_scope.split("@")
+    prefix_scope_part_1 = prefix_scope_part_1.strip()
+    prefix_scope_part_2 = prefix_scope_part_2.strip()
+    if len(prefix_scope_part_1) == 0:
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@' - '{prefix_scope_part_1}' is of length = 0 (empty)\n{error_msg}")
         return False
-    if '/' not in postfix_scope:
-        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@' - '{postfix_scope}' is missing '/' sign\n{error_msg}")
+    if '/' not in prefix_scope_part_1:
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@' - '{prefix_scope_part_1}' is missing '/' sign\n{error_msg}")
         return False
+    if len(prefix_scope_part_2) == 0:
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@' - '{prefix_scope_part_2}' is of length = 0 (empty)\n{error_msg}")
+        return False
+    if '/' not in prefix_scope_part_2:
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@' - '{prefix_scope_part_2}' is missing '/' sign\n{error_msg}")
+        return False
+
+
     for ps in [prefix_scope, postfix_scope]:
         a, b = ps.split("/")
         a = a.strip()
