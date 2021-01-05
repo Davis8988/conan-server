@@ -39,7 +39,7 @@ def check_params():
 def read_conf_file():
 	try:
 		config = configparser.ConfigParser()
-		print(f"Reading config ini file: '{conan_server_config_file}' ")
+		print(f"Reading config file")
 		config.read(conan_server_config_file)
 		return config
 	except BaseException as error_msg:
