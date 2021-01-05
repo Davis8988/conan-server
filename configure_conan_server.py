@@ -15,6 +15,7 @@ conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS"
 required_sections = ["server", "write_permissions", "read_permissions", "users"]
 
 def get_default_server_settings():
+	default_server_settings_config = configparser.ConfigParser()
 	default_server_section_data = {
 		'jwt_secret' : "sJTkzgNOewoPlGMpQYOKWnCd",
 		'jwt_expire_minutes' : "120",
@@ -27,10 +28,19 @@ def get_default_server_settings():
 		'disk_authorize_timeout' : "1800",
 		'updown_secret' : "ZlKsEGVuWWlmqWoOIGkVnSRQ"
 	}
-	default_server_settings_config = configparser.ConfigParser()
+
 	default_server_settings_config.add_section("server")
 	for k,v in default_server_section_data.items():
 		default_server_settings_config["server"][k] = v
+
+	default_read_permissions_section_data = {
+		'*/*@*/*' : '*'
+	}
+
+	default_server_settings_config.add_section("read_permissions")
+	for k,v in default_read_permissions_section_data.items():
+		default_server_settings_config["read_permissions"][k] = v
+
 	return default_server_settings_config
 
 
