@@ -162,9 +162,7 @@ def validate_permissions(permissions):
     if '/' not in prefix_scope_part_2:
         print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@' - '{prefix_scope_part_2}' is missing '/' sign\n{error_msg}")
         return False
-
-
-    for ps in [prefix_scope, postfix_scope]:
+    for ps in [prefix_scope_part_1, prefix_scope_part_2]:
         a, b = ps.split("/")
         a = a.strip()
         b = b.strip()
