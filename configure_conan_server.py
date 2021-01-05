@@ -59,15 +59,13 @@ def check_params():
     global conan_server_creds_list
     # Check conan-server config file var not null
     if not conan_server_config_file:
-        print(
-            f"Error - Var 'conan_server_config_file' is None. \nThe path to conan-server config ini file is null: '{conan_server_config_file}'\nDid you set env var: 'CONAN_SERVER_CONFIG_FILE' to it?\n cannot configure conan-server")
+        print(f"Error - Var 'conan_server_config_file' is None. \nThe path to conan-server config ini file is null: '{conan_server_config_file}'\nDid you set env var: 'CONAN_SERVER_CONFIG_FILE' to it?\n cannot configure conan-server")
         sys.exit(1)
 
     # Check conan-server config file exists
     print(f"Checking config file exists")
     if not os.path.exists(conan_server_config_file):
-        print(
-            f"Error - Missing conan-server config ini file: '{conan_server_config_file}' \n cannot configure conan-server")
+        print(f"Error - Missing conan-server config ini file: '{conan_server_config_file}' \n cannot configure conan-server")
         sys.exit(1)
 
 
@@ -145,24 +143,20 @@ def validate_permissions(permissions):
             f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@': '{prefix_scope}' is of length = 0 (empty)\n{error_msg}")
         return False
     if '/' not in prefix_scope:
-        print(
-            f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@': '{prefix_scope}' is missing '/' sign\n{error_msg}")
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@': '{prefix_scope}' is missing '/' sign\n{error_msg}")
         return False
     if len(postfix_scope) == 0:
-        print(
-            f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@': '{postfix_scope}' is of length = 0 (empty)\n{error_msg}")
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@': '{postfix_scope}' is of length = 0 (empty)\n{error_msg}")
         return False
     if '/' not in postfix_scope:
-        print(
-            f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@': '{postfix_scope}' is missing '/' sign\n{error_msg}")
+        print(f"Warning - Skipping configure permissions of: '{permissions}'  - The postfix scope after '@': '{postfix_scope}' is missing '/' sign\n{error_msg}")
         return False
     for ps in [prefix_scope, postfix_scope]:
         a, b = ps.split("/")
         a = a.strip()
         b = b.strip()
         if len(a) == 0 or len(b) == 0:
-            print(
-                f"Warning - Skipping configure permissions of: '{permissions}'  - One of the scopes between '/' sign of: '{ps}' is of length = 0 (empty)\n{error_msg}")
+            print(f"Warning - Skipping configure permissions of: '{permissions}'  - One of the scopes between '/' sign of: '{ps}' is of length = 0 (empty)\n{error_msg}")
             return False
     return True
 
