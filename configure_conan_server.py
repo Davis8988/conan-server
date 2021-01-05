@@ -151,14 +151,24 @@ def configure_conan_server_conf_file(config):
 				config["users"][username] = password
 
 	if conan_server_read_permissions:
-		print("Configuring Permissions")
-		for creds in conan_server_creds_list:
-			if not validate_creds(creds):
+		print("Configuring Read Permissions")
+		for permissions in conan_server_read_permissions:
+			if not validate_permissions(creds):
 				continue
-			username, password = creds.split(":")
-			if not config.has_option("users", username):
-				print(f"Adding username: '{username}'")
-				config["users"][username] = password
+			prefix_scope, postfix_scope = permissions.split(":")
+			if not config.has_option("read_permissions", prefix_scope):
+				print(f"Adding read permissions: '{permissions}'")
+				config["read_permissions"][prefix_scope] = postfix_scope
+
+	if conan_server_read_permissions:
+		print("Configuring Write Permissions")
+		for permissions in conan_server_write_permissions:
+			if not validate_permissions(creds):
+				continue
+			prefix_scope, postfix_scope = permissions.split(":")
+			if not config.has_option("write_permissions", prefix_scope):
+				print(f"Adding write permissions: '{permissions}'")
+				config["write_permissions"][prefix_scope] = postfix_scope
 
 
 def main():
