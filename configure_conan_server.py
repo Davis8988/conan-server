@@ -12,6 +12,7 @@ conan_server_creds_list = os.environ.get("CONAN_SERVER_CREDS_LIST", None)
 conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS", None)
 conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS", None)
 
+required_sections = ["server", "write_permissions", "read_permissions", "users"]
 
 def get_default_server_settings():
 	default_server_section_data = {
@@ -69,6 +70,10 @@ def read_conf_file():
 
 def validate_config(config, default_server_settings):
 	print("Validating config file")
+	for sec_name in required_sections:
+		if not config.has_section(sec_name):
+			print(f"Adding missing section to config file: '{sec_name}'")
+			config.add_section(sec_name)
 	for k,v in default_server_settings.items():
 		if not config.has_option("server", k):
 			print(f"Adding missing entry to config file: server.{k} = {v}")
