@@ -11,6 +11,9 @@ export CONAN_SERVER_CONFIG_FILE=${CONAN_SERVER_CONFIG_FILE:-/root/.conan_server/
 echo python Version:
 python --version
 
+# Check script exists:
+if [ ! -f "$(pwd)/configure_conan_server.py" ]; then echo Error - Missing or unreachable python script to configure conan-server config file: "$(pwd)/configure_conan_server.py"; echo Aborting.. ; exit 1; fi
+
 # Configure conan-server ini file
 echo Configuring conan-server ini file: '/root/.conan_server/server.conf'
 echo Executing: python $(pwd)/configure_conan_server.py
