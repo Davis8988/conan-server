@@ -36,19 +36,23 @@ def check_params():
 
 
 # Read conan-server config file
-try:
-	config = configparser.ConfigParser()
-	print(f"Reading config ini file: '{conan_server_config_file}' ")
-	config.read(conan_server_config_file)
-except BaseException as error_msg:
-	print(f"Error - Failed reading conan-server config ini file: '{conan_server_config_file}'\n{error_msg}")
-	sys.exit(1)
+def read_conf_file():
+	try:
+		config = configparser.ConfigParser()
+		print(f"Reading config ini file: '{conan_server_config_file}' ")
+		config.read(conan_server_config_file)
+		return config
+	except BaseException as error_msg:
+		print(f"Error - Failed reading conan-server config ini file: '{conan_server_config_file}'\n{error_msg}")
+		sys.exit(1)
 
 print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
+
 def main():
 	check_params()
+	read_conf_file()
 
-
+# Start
 if __name__ == "__main__":
 	main()
