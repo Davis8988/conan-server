@@ -45,3 +45,10 @@ except BaseException as error_msg:
 	sys.exit(1)
 
 print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
+
+def main():
+	check_params()
+
+
+if __name__ == "__main__":
+	main()
