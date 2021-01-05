@@ -89,11 +89,6 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
 		if not default_server_settings.has_section(sec_name):
 			continue
 		section = default_server_settings[sec_name]
-		if not config.has_section(sec_name):
-			section = default_server_settings[sec_name]
-			print(f"Adding default missing section & settings: {sec_name}")
-			config.add_section(section)
-			continue
 		for k,v in section.items():
 			k = k.strip()
 			v = v.strip()
