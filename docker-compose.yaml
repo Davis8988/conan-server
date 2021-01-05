@@ -1,6 +1,6 @@
 version: "3"
 
-# Restarting nexus will add configurations to conan-server config file incase they don't exist
+# Restarting conan-server will add configurations to conan-server config file incase they don't exist
 
 
 # Available Confs:
@@ -12,6 +12,7 @@ version: "3"
 # - CONAN_SERVER_CREDS_LIST=david:qawsED ; ben:zxcASD ; guy:ppp112     (Semicolon separated list of "user: pass"  pairs to configure conan-server to work with. Default: 'demo: demo')
 # - CONAN_SERVER_READ_PERMISSIONS_LIST=opencv/2.3.4@lasote/testing: david, guy ; internal/*@*/*: ben   (Semicolon separated list of "name/version@user/channel: user1, user2, user3"  pairs to configure conan-server to work with. Default: '*/*@*/*: *' - everyone can read anything)
 # - CONAN_SERVER_WRITE_PERMISSIONS_LIST=opencv/2.3.4@lasote/testing: david, guy ; internal/*@*/*: ben   (Semicolon separated list of "name/version@user/channel: user1, user2, user3"  pairs to configure conan-server to work with. Default: '*/*@*/*: *' - everyone can write anything)
+
 
 services:
   conan-server:

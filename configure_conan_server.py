@@ -183,7 +183,7 @@ def configure_conan_server_conf_file(config):
     if conan_server_read_permissions:
         print("Configuring Read Permissions")
         for permissions in conan_server_read_permissions:
-            if not validate_permissions(creds):
+            if not validate_permissions(permissions):
                 continue
             prefix_scope, postfix_scope = permissions.split(":")
             prefix_scope = prefix_scope.strip()
@@ -195,7 +195,7 @@ def configure_conan_server_conf_file(config):
     if conan_server_write_permissions:
         print("Configuring Write Permissions")
         for permissions in conan_server_write_permissions:
-            if not validate_permissions(creds):
+            if not validate_permissions(permissions):
                 continue
             prefix_scope, postfix_scope = permissions.split(":")
             prefix_scope = prefix_scope.strip()
