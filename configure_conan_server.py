@@ -79,6 +79,8 @@ def validate_config(config, default_server_settings):
 			print(f"Adding missing entry to config file: server.{k} = {v}")
 			config["server"][k] = v
 
+	print("Finished validating config file")
+
 
 def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
