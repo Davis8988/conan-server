@@ -47,10 +47,15 @@ def read_conf_file():
 		sys.exit(1)
 
 
+def validate_config():
+	print("Vlidating config file")
+
+
 def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 	check_params()
 	read_conf_file()
+	validate_config()
 	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
 
