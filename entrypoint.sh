@@ -12,14 +12,14 @@ echo python Version:
 python --version
 
 # Check script exists:
-if [ ! -f "$(pwd)/configure_conan_server.py" ]; then echo Error - Missing or unreachable python script to configure conan-server config file: "$(pwd)/configure_conan_server.py"; echo Aborting.. ; exit 1; fi
+if [ ! -f "$(pwd)/configure_conan_server.py" ]; then echo "Error - Missing or unreachable python script to configure conan-server config file: $(pwd)/configure_conan_server.py"; echo "Aborting.." ; exit 1; fi
 
 # Configure conan-server ini file
-echo Configuring conan-server ini file: '/root/.conan_server/server.conf'
+echo "Configuring conan-server ini file: '$CONAN_SERVER_CONFIG_FILE'"
 echo Executing: python $(pwd)/configure_conan_server.py
 python $(pwd)/configure_conan_server.py
-if [ "$?" != "0" ]; then echo Error - Failed configuring conan-server ini file: '/root/.conan_server/server.conf'; echo Failed during execution of: python $(pwd)/configure_conan_server.py; exit 1; fi
-echo Finished configuring conan-server ini file: '/root/.conan_server/server.conf'
+if [ "$?" != "0" ]; then echo "Error - Failed configuring conan-server ini file: '$CONAN_SERVER_CONFIG_FILE'"; echo "Failed during execution of: python $(pwd)/configure_conan_server.py" ; exit 1; fi
+echo "Finished configuring conan-server ini file: '$CONAN_SERVER_CONFIG_FILE'"
 echo ""
 
 # Print Confs
