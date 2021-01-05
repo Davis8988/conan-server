@@ -87,32 +87,34 @@ def validate_config(config, default_server_settings):
 
 
 def validate_creds(creds):
+	error_msg = "becuase they are not in the right format\n Should be: 'username: pass'. Example: 'david: 123'"
 	if not creds:
 		return False
 	if ':' not in creds:
-		print(f"Warning - Skipping configure creds of: '{creds}' becuase they are not in the right format\n Should be: 'username: pass'. Example: 'david: 123' ")
+		print(f"Warning - Skipping configure creds of: '{creds}' {error_msg} ")
 		return False
 	username, password = creds.split(":")
 	if len(username) == 0:
-		print(f"Warning - Skipping configure creds of: '{creds}' becuase they are not in the right format\nusername is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
+		print(f"Warning - Skipping configure creds of: '{creds}' {error_msg}")
 		return False
 	if len(password) == 0:
-		print(f"Warning - Skipping configure creds of: '{creds}' becuase they are not in the right format\npassword is of length 0\nShould be: 'username: pass'. Example: 'david: 123'")
+		print(f"Warning - Skipping configure creds of: '{creds}' {error_msg}")
 		return False
 	return True
 
 def validate_permissions(permissions):
+	error_msg = "becuase they are not in the right format\n Should be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo' "
 	if not permissions:
 		return False
 	if ':' not in permissions:
-		print(f"Warning - Skipping configure permissions of: '{permissions}' becuase they are not in the right format\n Should be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo' ")
+		print(f"Warning - Skipping configure permissions of: '{permissions}' {error_msg}")
 		return False
 	username, password = permissions.split(":")
 	if len(username) == 0:
-		print(f"Warning - Skipping configure permissions of: '{permissions}' becuase they are not in the right format\nusername is of length 0\nShould be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo'")
+		print(f"Warning - Skipping configure permissions of: '{permissions}' {error_msg}")
 		return False
 	if len(password) == 0:
-		print(f"Warning - Skipping configure permissions of: '{permissions}' becuase they are not in the right format\npassword is of length 0\nShould be: 'name/version@user/channel: user1, user2, user3'. Example: '*/*@*/*: demo'")
+		print(f"Warning - Skipping configure permissions of: '{permissions}' {error_msg}")
 		return False
 	return True
 
