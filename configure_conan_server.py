@@ -48,7 +48,7 @@ def read_conf_file():
 
 
 def validate_config(config):
-	print("Vlidating config file")
+	print("Validating config file")
 
 
 def main():
