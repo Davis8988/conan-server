@@ -25,8 +25,8 @@ echo "  Config File: '$CONAN_SERVER_CONFIG_FILE'"
 echo "  Listen Address: '$CONAN_SERVER_LISTEN_IP:$CONAN_SERVER_LISTEN_PORT'"
 echo "  Workers: '$CONAN_SERVER_WORKERS_COUNT'"
 echo "  Timeout Seconds: '$CONAN_SERVER_TIMEOUT_SECONDS'"
-echo "  Write Permissions: '$CONAN_SERVER_WRITE_PERMISSIONS'"
-echo "  Read Permissions: '$CONAN_SERVER_READ_PERMISSIONS'"
+echo "  Write Permissions: '$CONAN_SERVER_WRITE_PERMISSIONS_LIST'"
+echo "  Read Permissions: '$CONAN_SERVER_READ_PERMISSIONS_LIST'"
 echo ""
 
 # Start conan-server
