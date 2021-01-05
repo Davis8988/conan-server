@@ -47,7 +47,7 @@ def get_default_server_settings():
 def convert_to_list(string_var, delimiter):
 	if not string_var:
 		return None
-	converted_list = string_var.split(";")
+	converted_list = string_var.split(delimiter)
 	if type(converted_list) != list:
 		print(f"Error - Failed to convert var 'string_var={string_var}' to type 'list' using split(';')")
 		return None
@@ -147,9 +147,9 @@ def configure_conan_server_conf_file(config):
 	global conan_server_creds_list
 	global conan_server_read_permissions
 	global conan_server_write_permissions
-	conan_server_creds_list = convert_to_list(conan_server_creds_list)
-	conan_server_read_permissions = convert_to_list(conan_server_read_permissions)
-	conan_server_write_permissions = convert_to_list(conan_server_write_permissions)
+	conan_server_creds_list = convert_to_list(conan_server_creds_list, ";")
+	conan_server_read_permissions = convert_to_list(conan_server_read_permissions, ";")
+	conan_server_write_permissions = convert_to_list(conan_server_write_permissions, ";")
 	if conan_server_creds_list:
 		print("Configuring Creds")
 		for creds in conan_server_creds_list:
