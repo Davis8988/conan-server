@@ -100,7 +100,7 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
 				config[sec_name][k] = v
 
 
-def validate_config(config, default_server_settings):
+def validate_config(config):
 	print("Validating config file")
 	for sec_name in required_sections:
 		if not config.has_section(sec_name):
