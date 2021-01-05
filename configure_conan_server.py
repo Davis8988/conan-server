@@ -103,6 +103,10 @@ def configure_conan_server_conf_file(config):
 		for creds in conan_server_creds_list:
 			if not validate_creds(creds):
 				continue
+			username, password = creds.split(":")
+			if not config.has_option("users", username):
+				print(f"Adding username: '{username}'")
+				config["users"][username] = password
 
 
 def main():
