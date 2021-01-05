@@ -36,5 +36,5 @@ services:
       - "9300:9300"
     environment:
       - "CONAN_SERVER_HOST_NAME=${HOST_IP_ADDR}"
-      - "CONAN_SERVER_CREDS_LIST=admin: 1234578"
+      - "CONAN_SERVER_CREDS_LIST=admin: 12345678"
       - "CONAN_SERVER_WRITE_PERMISSIONS_LIST=*/*@*/*: admin"
