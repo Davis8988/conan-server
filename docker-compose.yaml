@@ -1,0 +1,30 @@
+version: "3"
+
+# Restarting conan-server will add configurations to conan-server config file incase they don't exist
+
+
+# Available Confs:
+# - CONAN_SERVER_LISTEN_IP=127.0.0.1    (Listen IP for conan-server to accept requests from. Default: '0.0.0.0' means every ip)
+# - CONAN_SERVER_LISTEN_PORT=4544       (Listen Port for conan-server to accept requests from. Default: '9300')
+# - CONAN_SERVER_WORKERS_COUNT=7        (gunicorn workers count. Default: 4)
+# - CONAN_SERVER_TIMEOUT_SECONDS=120    (conan-server timeout in seconds. Default: '300')
+# - CONAN_SERVER_CONFIG_FILE=/home/.conan_server/server.conf  (Path to conan-server config file. Default: /root/.conan_server/server.conf)
+# - CONAN_SERVER_CREDS_LIST=david:qawsED ; ben:zxcASD ; guy:ppp112     (Semicolon separated list of "user: pass"  pairs to configure conan-server to work with. Default: 'demo: demo')
+# - CONAN_SERVER_READ_PERMISSIONS_LIST=opencv/2.3.4@lasote/testing: david, guy ; internal/*@*/*: ben   (Semicolon separated list of "name/version@user/channel: user1, user2, user3"  pairs to configure conan-server to work with. Default: '*/*@*/*: *' - everyone can read anything)
+# - CONAN_SERVER_WRITE_PERMISSIONS_LIST=opencv/2.3.4@lasote/testing: david, guy ; internal/*@*/*: ben   (Semicolon separated list of "name/version@user/channel: user1, user2, user3"  pairs to configure conan-server to work with. Default: '*/*@*/*: *' - everyone can write anything)
+
+
+services:
+  conan-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nteptartifact:5014/conan-server/conan-server:3.17.0-conanio
+    container_name: conan-server
+    volumes:
+     - ./conan-server-data:/root/.conan_server/data
+    ports:
+      - "9300:9300"
+    environment:
+      - "CONAN_SERVER_CREDS_LIST=admin: 1234578"
+      - "CONAN_SERVER_WRITE_PERMISSIONS_LIST=*/*@*/*: admin"
