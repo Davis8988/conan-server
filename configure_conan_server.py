@@ -12,7 +12,6 @@ conan_server_creds_list = os.environ.get("CONAN_SERVER_CREDS_LIST", None)
 conan_server_read_permissions = os.environ.get("CONAN_SERVER_READ_PERMISSIONS", None)
 conan_server_write_permissions = os.environ.get("CONAN_SERVER_WRITE_PERMISSIONS", None)
 
-required_sections = ["DEFAULT", "server", "write_permissions", "read_permissions", "users"]
 
 def check_params():
 	global conan_server_creds_list
@@ -50,6 +49,8 @@ def read_conf_file():
 
 def validate_config(config):
 	print("Validating config file")
+
+
 
 
 def main():
