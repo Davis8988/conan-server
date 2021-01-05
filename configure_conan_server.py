@@ -75,9 +75,6 @@ def validate_config(config, default_server_settings):
 			config["server"][k] = v
 
 
-
-
-
 def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 	check_params()
