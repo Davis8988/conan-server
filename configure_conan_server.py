@@ -107,7 +107,6 @@ def validate_config(config):
 		if not config.has_section(sec_name):
 			print(f"Error - Conan config file: '{conan_server_config_file}' is missing section: '{sec_name}'\nCannot continue with missing configurations")
 			sys.exit(1)
-	print("Finished validating config file")
 	return config
 
 
