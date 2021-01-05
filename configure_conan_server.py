@@ -72,6 +72,7 @@ def check_params():
 
 # Read conan-server config file
 def read_conf_file():
+	global conan_server_config_file
 	try:
 		config = configparser.ConfigParser()
 		print(f"Reading config file")
@@ -83,6 +84,7 @@ def read_conf_file():
 
 
 def fix_missing_settings_with_defaults(config, default_server_settings):
+	print("Fixing missing sections and entries in config file with defaults")
 	for sec_name in required_sections:
 		if not default_server_settings.has_section(sec_name):
 			continue
@@ -102,12 +104,8 @@ def validate_config(config, default_server_settings):
 	print("Validating config file")
 	for sec_name in required_sections:
 		if not config.has_section(sec_name):
-			print(f"Adding missing section to config file: '{sec_name}'")
-			config.add_section(sec_name)
-	for k,v in default_server_settings.items():
-		if not config.has_option("server", k):
-			print(f"Adding missing entry to config file: server.{k} = {v}")
-			config["server"][k] = v
+			print(f"Error - Conan config file: '{conan_server_config_file}' is missing section: '{sec_name}'\nCannot continue with missing configurations")
+			sys.exit(1)
 	print("Finished validating config file")
 	return config
 
@@ -213,9 +211,9 @@ def main():
 	check_params()
 	config = read_conf_file()
 	default_server_settings = get_default_server_settings()
-	config = fix_missing_settings_with_defaults(config, default_server_settings)
-	config = validate_config(config, default_server_settings)
 	config = configure_conan_server_conf_file(config)
+	config = fix_missing_settings_with_defaults(config, default_server_settings)
+	validate_config(config)
 	write_conan_server_conf_file(config)
 	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
