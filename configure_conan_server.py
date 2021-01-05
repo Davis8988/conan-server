@@ -108,8 +108,8 @@ def validate_config(config):
 	print("Validating config file")
 	for sec_name in required_sections:
 		if not config.has_section(sec_name):
-			print(f"Error - Conan config file: '{conan_server_config_file}' is missing section: '{sec_name}'\nCannot continue with missing configurations")
-			sys.exit(1)
+			print(f"Adding is missing section: '{sec_name}'")
+			config.add_section(sec_name)
 	return config
 
 
@@ -225,10 +225,10 @@ def main():
 	print(f"Configuring conan-server config ini file: '{conan_server_config_file}' ")
 	check_params()
 	config = read_conf_file()
+	config = validate_config(config)
 	default_server_settings = get_default_server_settings()
 	config = configure_conan_server_conf_file(config)
 	config = fix_missing_settings_with_defaults(config, default_server_settings)
-	validate_config(config)
 	write_conan_server_conf_file(config)
 	print(f"Finished configuring conan-server config ini file: '{conan_server_config_file}' ")
 
