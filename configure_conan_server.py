@@ -121,6 +121,8 @@ def validate_creds(creds):
 		print(f"Warning - Skipping configure creds of: '{creds}' - Missing ':'\n{error_msg} ")
 		return False
 	username, password = creds.split(":")
+	username = username.strip()
+	password = password.strip()
 	if len(username) == 0:
 		print(f"Warning - Skipping configure creds of: '{creds}' - username is of length = 0 (empty)\n{error_msg}")
 		return False
@@ -140,6 +142,8 @@ def validate_permissions(permissions):
 		print(f"Warning - Skipping configure permissions of: '{permissions}' - Missing '@'\n{error_msg}")
 		return False
 	prefix_scope, postfix_scope = permissions.split(":")
+	prefix_scope = prefix_scope.strip()
+	postfix_scope = postfix_scope.strip()
 	if len(prefix_scope) == 0:
 		print(f"Warning - Skipping configure permissions of: '{permissions}'  - The prefix scope before '@': '{prefix_scope}' is of length = 0 (empty)\n{error_msg}")
 		return False
@@ -154,6 +158,8 @@ def validate_permissions(permissions):
 		return False
 	for ps in [prefix_scope, postfix_scope]:
 		a,b = ps.split("/")
+		a = a.strip()
+		b = b.strip()
 		if len(a) == 0 or len(b) == 0:
 			print(f"Warning - Skipping configure permissions of: '{permissions}'  - One of the scopes between '/' sign of: '{ps}' is of length = 0 (empty)\n{error_msg}")
 			return False
