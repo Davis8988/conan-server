@@ -90,7 +90,7 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
 			continue
 		section = default_server_settings[sec_name]
 		if not config.has_section(sec_name):
-			section = default_server_settings.get(sec_name)
+			section = default_server_settings[sec_name]
 			print(f"Adding default missing section & settings: {sec_name}")
 			config.add_section(section)
 			continue
@@ -171,6 +171,8 @@ def configure_conan_server_conf_file(config):
 				continue
 			username, password = creds.split(":")
 			if not config.has_option("users", username):
+				username = username.strip()
+				password = password.strip()
 				print(f"Adding username: '{username}'")
 				config["users"][username] = password
 
@@ -182,6 +184,8 @@ def configure_conan_server_conf_file(config):
 			prefix_scope, postfix_scope = permissions.split(":")
 			if not config.has_option("read_permissions", prefix_scope):
 				print(f"Adding read permissions: '{permissions}'")
+				prefix_scope = prefix_scope.strip()
+				postfix_scope = postfix_scope.strip()
 				config["read_permissions"][prefix_scope] = postfix_scope
 
 	if conan_server_write_permissions:
@@ -192,6 +196,8 @@ def configure_conan_server_conf_file(config):
 			prefix_scope, postfix_scope = permissions.split(":")
 			if not config.has_option("write_permissions", prefix_scope):
 				print(f"Adding write permissions: '{permissions}'")
+				prefix_scope = prefix_scope.strip()
+				postfix_scope = postfix_scope.strip()
 				config["write_permissions"][prefix_scope] = postfix_scope
 
 	return config
