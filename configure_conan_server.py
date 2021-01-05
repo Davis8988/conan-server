@@ -97,7 +97,10 @@ def fix_missing_settings_with_defaults(config, default_server_settings):
 		for k,v in section.items():
 			if not config.has_option(sec_name, k):
 				print(f"Adding default missing configuration: {sec_name}.{k}={v}")
+				k = k.strip()
+				v = v.strip()
 				config[sec_name][k] = v
+
 	return config
 
 
